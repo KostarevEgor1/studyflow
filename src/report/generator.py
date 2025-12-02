@@ -85,5 +85,5 @@ def render_student_report(
         predicted_grade=predicted_grade,
         recommendations=recommendations,
         plot_html=plot_html,
-        now = datetime.now().strftime("%d.%m.%Y %H:%M")
+        now=datetime.now().strftime("%d.%m.%Y %H:%M")
     )
