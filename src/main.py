@@ -6,8 +6,6 @@
 
 import argparse
 import os
-import pandas as pd
-from datetime import datetime
 
 from src.core import parser, analyzer, predictor, recommender
 from src.report import generator, visualizer
