@@ -19,9 +19,11 @@ def correlate_activities(logs_df: pd.DataFrame, grades_df: pd.DataFrame) -> dict
     return correlations
 
 
-def get_student_data(logs_df: pd.DataFrame, 
-                     grades_df: pd.DataFrame, 
-                     student_id: int) -> dict:
+def get_student_data(
+    logs_df: pd.DataFrame,
+    grades_df: pd.DataFrame,
+    student_id: int
+) -> dict:
     """Возвращает данные студента: активность + оценки."""
     student_logs = logs_df[logs_df["student_id"] == student_id]
     student_grade_row = grades_df[grades_df["student_id"] == student_id]
