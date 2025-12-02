@@ -1,0 +1,70 @@
+name: Report Generator
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Ежедневно в 02:00 UTC
+  workflow_dispatch:
+    inputs:
+      student_id:
+        description: 'ID студента (оставьте пустым для всех)'
+        required: false
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Для коммита и деплоя
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Generate report(s)
+      run: |
+        mkdir -p reports
+        STUDENT="${{ github.event.inputs.student_id }}"
+        if [ -n "$STUDENT" ]; then
+          python src/main.py \
+            --logs data/sample_logs.csv \
+            --grades data/sample_grades.csv \
+            --student "$STUDENT"
+        else
+          python src/main.py \
+            --logs data/sample_logs.csv \
+            --grades data/sample_grades.csv \
+            --all
+        fi
+
+    - name: Upload reports as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: studyflow-reports-${{ github.run_id }}
+        path: reports/
+
+    - name: Commit reports (for scheduled runs)
+      if: github.event_name == 'schedule'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add reports/
+        git commit -m "chore: auto-generate reports $(date +%Y-%m-%d)" || echo "No changes"
+        git push
+
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'schedule'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: reports
+        destination_dir: .
+        keep_files: false
