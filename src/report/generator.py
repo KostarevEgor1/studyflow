@@ -1,5 +1,5 @@
 from jinja2 import Template
-
+from datetime import datetime
 
 _REPORT_TEMPLATE = """
 <!DOCTYPE html>
@@ -64,5 +64,5 @@ def render_student_report(student_id: int, data: dict, predicted_grade: float, r
         predicted_grade=predicted_grade,
         recommendations=recommendations,
         plot_html=plot_html,
-        now=pd.Timestamp.now().strftime("%d.%m.%Y %H:%M")
+        now = datetime.now().strftime("%d.%m.%Y %H:%M")
     )
