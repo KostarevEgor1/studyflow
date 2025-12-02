@@ -9,10 +9,25 @@ _REPORT_TEMPLATE = """
     <title>StudyFlow — Отчёт для студента {{ student_id }}</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 40px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 40px;
+        }
         .header { text-align: center; color: #2c3e50; }
-        .metric { display: inline-block; margin: 10px; padding: 15px; background: #ecf0f1; border-radius: 8px; }
-        .rec { background: #e8f4f8; padding: 12px; margin: 10px 0; border-left: 4px solid #3498db; }
+        .metric {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+        .rec {
+            background: #e8f4f8;
+            padding: 12px;
+            margin: 10px 0;
+            border-left:
+            4px solid #3498db;
+        }
     </style>
 </head>
 <body>
@@ -49,14 +64,20 @@ _REPORT_TEMPLATE = """
 
     <hr>
     <footer>
-        Сгенерировано автоматически с помощью <a href="https://gitverse.ru/YOUR_USERNAME/studyflow">StudyFlow</a> • {{ now }}
+        Сгенерировано автоматически с помощью
+        <a href="https://gitverse.ru/KostarevEgor1/studyflow">StudyFlow</a>
+        • {{ now }}
     </footer>
 </body>
 </html>
 """
 
 
-def render_student_report(student_id: int, data: dict, predicted_grade: float, recommendations: list, plot_html: str) -> str:
+def render_student_report(
+    student_id: int, data: dict, predicted_grade: float,
+    recommendations: list,
+    plot_html: str
+) -> str:
     template = Template(_REPORT_TEMPLATE)
     return template.render(
         student_id=student_id,
