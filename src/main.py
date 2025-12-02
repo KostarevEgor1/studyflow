@@ -12,11 +12,21 @@ from src.report import generator, visualizer
 
 
 def main():
-    parser_ = argparse.ArgumentParser(description="StudyFlow: Анализ эффективности обучения")
+    parser_ = argparse.ArgumentParser(
+        description="StudyFlow: Анализ эффективности обучения"
+    )
     parser_.add_argument("--logs", required=True, help="Путь к CSV с логами LMS")
     parser_.add_argument("--grades", required=True, help="Путь к CSV с оценками")
-    parser_.add_argument("--student", type=int, help="ID студента для персонального отчёта")
-    parser_.add_argument("--all", action="store_true", help="Сгенерировать отчёты для всех")
+    parser_.add_argument(
+        "--student",
+        type=int,
+        help="ID студента для персонального отчёта"
+    )
+    parser_.add_argument(
+        "--all",
+        action="store_true",
+        help="Сгенерировать отчёты для всех"
+    )
     parser_.add_argument(
         "--output",
         default="reports",
@@ -51,7 +61,11 @@ def main():
             plot_html=fig.to_html(full_html=False, include_plotlyjs='cdn')
         )
 
-        out_path = args.output if args.output.endswith(".html") else f"{args.output}/report_student_{args.student}.html"
+        out_path = (
+            args.output
+            if args.output.endswith(".html")
+            else f"{args.output}/report_student_{args.student}.html"
+        )
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(report_html)
         print(f"✅ Отчёт сохранён: {out_path}")
@@ -83,7 +97,11 @@ def main():
         # Общий анализ
         correlation = analyzer.correlate_activities(logs_df, grades_df)
         print("🔍 Корреляция активности и итоговой оценки:")
-        for act, corr in sorted(correlation.items(), key=lambda x: abs(x[1]), reverse=True):
+        for act, corr in sorted(
+            correlation.items(),
+            key=lambda x: abs(x[1]),
+            reverse=True
+        ):
             print(f"  {act}: {corr:+.3f}")
 
 
