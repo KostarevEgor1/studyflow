@@ -9,6 +9,6 @@ def test_render_student_report():
         recommendations=["Пишите в форум!"],
         plot_html="<div>Mock Plot</div>"
     )
-    assert "Студент ID: 101" in html
+    assert "Студент ID:</strong> 101" in html
     assert "87.3" in html
     assert "Пишите в форум!" in html
