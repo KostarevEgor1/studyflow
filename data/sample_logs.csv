@@ -1,0 +1,12 @@
+timestamp,student_id,event_type,object_id
+2025-03-01 10:00:00,101,login,
+2025-03-01 10:05:22,101,view,lecture_1
+2025-03-01 11:30:15,101,forum,post_42
+2025-03-02 09:12:03,101,quiz_attempt,quiz_1
+2025-03-03 16:45:11,101,forum,reply_87
+2025-03-01 10:02:10,102,login,
+2025-03-01 10:10:00,102,view,lecture_1
+2025-03-01 14:20:33,102,video,video_3
+2025-03-02 11:05:44,102,quiz_attempt,quiz_1
+2025-03-02 11:10:21,102,quiz_attempt,quiz_1
+2025-03-04 20:01:05,102,view,lecture_2
