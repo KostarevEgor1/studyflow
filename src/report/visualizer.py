@@ -1,5 +1,4 @@
 import plotly.graph_objects as go
-import pandas as pd
 
 
 def plot_student_activity(student_data: dict) -> go.Figure:
