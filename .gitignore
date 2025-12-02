@@ -1,0 +1,34 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files (если большие — исключаем, но sample оставляем)
+data/*.csv
+!data/sample_*.csv
+
+# Generated reports
+reports/*
+
+# Logs
+*.log
+.DS_Store
+
+# Coverage
+.coverage
+htmlcov/
